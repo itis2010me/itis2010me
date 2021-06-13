@@ -2,7 +2,7 @@
 - This github is where I keep my small personal projects and some interesting course projects.
 - I am interested in computer architecture and algorithms.
 - You can reach me via email : merchang@ucdavis.edu
-
+- https://itis2010me.github.io/itis2010me/
   
 
 <!---
