@@ -1,2 +1,5 @@
 .DS_Store
 *.exe
+cv.log
+cv.synctex.gz
+cv.pfd
