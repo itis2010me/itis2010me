@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Yuan Chang. Currently a senior CS student with a mathematics minor at UC Davis.
 - This github is where I keep my small personal projects and some interesting course projects.
-- I am interested in computer architecture and algorithms.
+- I am interested in computer architecture and computational mathematics.
 - You can reach me via email: merchang@ucdavis.edu
 - Checkout my website: https://itis2010me.github.io/itis2010me/
   
