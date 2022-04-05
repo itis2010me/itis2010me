@@ -2,3 +2,4 @@
 *.exe
 cv.log
 cv.synctex.gz
+*.log
