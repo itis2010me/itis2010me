@@ -1,9 +1,8 @@
-- 👋 Hi, I’m Yuan Chang. Currently a senior CS student with a mathematics minor at UC Davis.
+- 👋 Hi, This is Merlin Chang. Currently a Masters CS student at UC San Diego.
 - This github is where I keep my small personal projects and some interesting course projects.
 - I am interested in Machine Learning and Computational Mathematics.
-- You can reach me via email: merchang@ucdavis.edu
+- You can reach me via email: yuc133@ucsd.edu
 - Checkout my website: https://itis2010me.github.io/itis2010me/
-- I will be going to UCSD in Fall 2022.
   
 
 <!---
