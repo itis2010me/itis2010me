@@ -1,0 +1,4 @@
+theme = xcode dark
+font-size = 16
+font-thicken = true
+font-family = Consolas
