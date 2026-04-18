@@ -1,0 +1,21 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: #f4ecd8;
+  color: #1f1f1f;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', 'Consolas', ui-monospace, monospace;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#out {
+  font-size: 22px;
+  line-height: 1;
+  white-space: pre;
+  color: #1f1f1f;
+  user-select: none;
+  letter-spacing: 0;
+}
