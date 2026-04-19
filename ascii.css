@@ -181,21 +181,21 @@ body.page {
   opacity: 0.8;
 }
 
-[data-theme="dark"] html,
-[data-theme="dark"] body {
+html[data-theme="dark"],
+html[data-theme="dark"] body {
   background: #1a1a1a;
   color: #e8e0cc;
 }
 
-[data-theme="dark"] #out {
+html[data-theme="dark"] #out {
   color: #e8e0cc;
 }
 
-[data-theme="dark"] .footer {
+html[data-theme="dark"] .footer {
   border-top-color: rgba(232, 224, 204, 0.15);
 }
 
-@media (max-width: 700px), (max-height: 700px) {
+@media (max-width: 700px), (max-height: 500px) {
   body.landing {
     display: flex;
     flex-direction: column;
