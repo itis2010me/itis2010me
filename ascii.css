@@ -24,10 +24,20 @@ body.landing {
 
 body.landing .greeting,
 body.landing .nav,
-body.landing #out {
+body.landing #out,
+body.landing .landing-footer {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+body.landing .landing-footer {
+  top: auto;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  border-top: none;
+  margin: 0;
+  padding: 0;
 }
 
 body.landing .greeting { top: 15%; }
@@ -37,6 +47,7 @@ body.landing #out { top: 50%; }
 body.page {
   min-height: 100%;
   padding: 2.5rem 1.5rem 5rem;
+  position: relative;
 }
 
 .greeting {
@@ -44,6 +55,7 @@ body.page {
   font-weight: 700;
   letter-spacing: 0.02em;
   text-align: center;
+  view-transition-name: site-title;
 }
 
 .home {
@@ -55,6 +67,7 @@ body.page {
   color: inherit;
   text-decoration: none;
   letter-spacing: 0.1em;
+  view-transition-name: site-title;
 }
 
 .home:hover {
@@ -68,6 +81,7 @@ body.page {
   margin: 0 auto;
   font-size: 16px;
   letter-spacing: 0.08em;
+  view-transition-name: site-nav;
 }
 
 .nav a {
@@ -83,7 +97,7 @@ body.page {
 }
 
 #out {
-  font-size: 20px;
+  font-size: min(20px, 2.9vw);
   line-height: 1;
   white-space: pre;
   color: #1f1f1f;
@@ -125,4 +139,100 @@ body.page {
 .entry-meta {
   opacity: 0.65;
   font-size: 13px;
+}
+
+.footer {
+  max-width: 680px;
+  margin: 4rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(31, 31, 31, 0.15);
+  font-size: 13px;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.dark-toggle {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: pre;
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.4;
+  user-select: none;
+  padding: 0;
+}
+
+.dark-toggle:hover {
+  opacity: 0.8;
+}
+
+[data-theme="dark"] html,
+[data-theme="dark"] body {
+  background: #1a1a1a;
+  color: #e8e0cc;
+}
+
+[data-theme="dark"] #out {
+  color: #e8e0cc;
+}
+
+[data-theme="dark"] .footer {
+  border-top-color: rgba(232, 224, 204, 0.15);
+}
+
+@media (max-width: 700px), (max-height: 700px) {
+  body.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+  }
+
+  body.landing .greeting,
+  body.landing .nav,
+  body.landing #out,
+  body.landing .landing-footer {
+    position: static;
+    transform: none;
+  }
+
+  body.landing .landing-footer {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .greeting {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+
+  .nav {
+    font-size: 14px;
+  }
+
+  .content {
+    font-size: 15px;
+  }
+
+  body.page {
+    padding-bottom: 3rem;
+  }
 }

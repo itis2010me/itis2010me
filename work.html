@@ -4,7 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Work — Merlin Chang</title>
-  <link rel="stylesheet" href="ascii.css">
+  <meta name="description" content="Merlin Chang's work — AWS, UCSD, automated reasoning research.">
+  <meta property="og:title" content="Work — Merlin Chang">
+  <meta property="og:description" content="AWS Automated Reasoning Group, HPC, and Ramsey theory research.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://itis2010me.github.io/work.html">
+  <meta name="twitter:card" content="summary">
+  <script>
+    const t=localStorage.getItem('theme');
+    if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))
+      document.documentElement.setAttribute('data-theme','dark');
+  </script>
+  <style>
+    @view-transition { navigation: auto; }
+    .home { view-transition-name: site-title; }
+    .nav { view-transition-name: site-nav; }
+  </style>
+  <link rel="stylesheet" href="ascii.css" blocking="render">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="page">
@@ -36,14 +52,18 @@
     </div>
 
     <div class="entry">
-      <div class="entry-title">SAT Solver Research — UC Davis</div>
+      <div class="entry-title">UC Davis — Automated Reasoning Research</div>
       <div class="entry-meta">with Prof. Jesús De Loera and Jack Wesley</div>
-      <p>Studied the efficiency of SAT solvers — DPLL optimization via clause learning and multithreaded solvers, and input-encoding tricks for larger instances. Worked with satch, minisat, and glucose.</p>
+      <p>Explored Ramsey theory and Rado's theorems computationally — encoding linear homogeneous equation systems as SAT instances with symmetry-breaking techniques, then solving with satch, glucose, and minisat to verify or challenge theoretical predictions about Rado numbers.</p>
       <p>
         <a href="https://github.com/itis2010me/SAT_Research">GitHub</a> ·
         <a href="https://dl.acm.org/doi/10.1145/3476446.3535494">Publication</a>
       </p>
     </div>
   </main>
+
+  <button id="theme-toggle" class="dark-toggle" aria-label="Toggle dark mode"></button>
+  <script src="typewriter.js"></script>
+  <script src="theme.js"></script>
 </body>
 </html>

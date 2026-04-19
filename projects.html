@@ -4,7 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects — Merlin Chang</title>
-  <link rel="stylesheet" href="ascii.css">
+  <meta name="description" content="Merlin Chang's projects — TermFrenzy, wildfire optimization, Haskell games, Unix shells.">
+  <meta property="og:title" content="Projects — Merlin Chang">
+  <meta property="og:description" content="Side projects: TermFrenzy, wildfire optimization, MasterMind in Haskell, a Unix shell, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://itis2010me.github.io/projects.html">
+  <meta name="twitter:card" content="summary">
+  <script>
+    const t=localStorage.getItem('theme');
+    if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))
+      document.documentElement.setAttribute('data-theme','dark');
+  </script>
+  <style>
+    @view-transition { navigation: auto; }
+    .home { view-transition-name: site-title; }
+    .nav { view-transition-name: site-nav; }
+  </style>
+  <link rel="stylesheet" href="ascii.css" blocking="render">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="page">
@@ -16,6 +32,14 @@
   </nav>
   <main class="content">
     <h1>Projects <span style="font-weight:400;opacity:0.55;">(WIP)</span></h1>
+
+    <div class="entry">
+      <div class="entry-title">TermFrenzy</div>
+      <p>A terminal-based game inspired by PopCap's Feeding Frenzy, built with Python and blessed. Eat smaller fish to grow while dodging sharks and jellyfish — all in ASCII.</p>
+      <p>
+        <a href="https://github.com/itis2010me/TermFrenzy">GitHub</a>
+      </p>
+    </div>
 
     <div class="entry">
       <div class="entry-title">Wildfire Minimization</div>
@@ -51,5 +75,9 @@
       </p>
     </div>
   </main>
+
+  <button id="theme-toggle" class="dark-toggle" aria-label="Toggle dark mode"></button>
+  <script src="typewriter.js"></script>
+  <script src="theme.js"></script>
 </body>
 </html>

@@ -4,7 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — Merlin Chang</title>
-  <link rel="stylesheet" href="ascii.css">
+  <meta name="description" content="About Merlin Chang — software engineer at AWS, based in Seattle.">
+  <meta property="og:title" content="About — Merlin Chang">
+  <meta property="og:description" content="Software engineer at AWS, based in Seattle. UCSD CSE M.S., UC Davis alum.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://itis2010me.github.io/about.html">
+  <meta name="twitter:card" content="summary">
+  <script>
+    const t=localStorage.getItem('theme');
+    if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))
+      document.documentElement.setAttribute('data-theme','dark');
+  </script>
+  <style>
+    @view-transition { navigation: auto; }
+    .home { view-transition-name: site-title; }
+    .nav { view-transition-name: site-nav; }
+  </style>
+  <link rel="stylesheet" href="ascii.css" blocking="render">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="page">
@@ -26,5 +42,9 @@
       <a href="https://github.com/itis2010me">GitHub</a>
     </p>
   </main>
+
+  <button id="theme-toggle" class="dark-toggle" aria-label="Toggle dark mode"></button>
+  <script src="typewriter.js"></script>
+  <script src="theme.js"></script>
 </body>
 </html>
