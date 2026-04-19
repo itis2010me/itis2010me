@@ -161,9 +161,10 @@ body.page {
 }
 
 .dark-toggle {
-  position: absolute;
+  position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
+  z-index: 100;
   cursor: pointer;
   font-family: inherit;
   font-size: 11px;
@@ -235,4 +236,5 @@ html[data-theme="dark"] .footer {
   body.page {
     padding-bottom: 3rem;
   }
+
 }

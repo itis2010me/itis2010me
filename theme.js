@@ -1,20 +1,27 @@
+const SUN = '<span style="font-size:18px">☀</span>';
+const MOON = '<span style="font-size:18px">☽</span>';
+
 const SWITCH_ON =
+  '  ' + SUN + '  \n' +
   '.---.\n' +
   '| o |\n' +
   '|   |\n' +
-  "'---'";
+  "'---'\n" +
+  '  ' + MOON + '  ';
 
 const SWITCH_OFF =
+  '  ' + SUN + '  \n' +
   '.---.\n' +
   '|   |\n' +
   '| o |\n' +
-  "'---'";
+  "'---'\n" +
+  '  ' + MOON + '  ';
 
 const toggle = document.getElementById('theme-toggle');
 
 function setTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  toggle.textContent = dark ? SWITCH_OFF : SWITCH_ON;
+  toggle.innerHTML = dark ? SWITCH_OFF : SWITCH_ON;
   localStorage.setItem('theme', dark ? 'dark' : 'light');
 }
 

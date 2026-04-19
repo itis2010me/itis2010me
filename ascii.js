@@ -148,7 +148,7 @@ function getState(t) {
     }
 
     const winkPhase = (tt + 1.4) % 9.0;
-    if (winkPhase < 0.32) leftEye = '-';
+    if (winkPhase < 0.32) leftEye = '_';
   }
 
   return { reveals, blink, eyeDx, eyeDy, faceDx, faceDy, mouth, mouthScale, leftEye, rightEye, bobY };
@@ -167,17 +167,17 @@ function renderFace(s) {
     let ch = p.char;
     let dx = 0;
     let dy = 0;
+    let closed = false;
     if (EYE_INDICES.has(i)) {
       const override = i === 1 ? s.leftEye : s.rightEye;
-      let closed = false;
       if (override !== null) {
         ch = override;
         if (override === '-' || override === '_') closed = true;
       } else if (s.blink > 0.3) {
-        ch = '-';
+        ch = '_';
         closed = true;
       }
-      if (closed) dy = -fontSize * 0.22;
+      if (closed) dy = -fontSize * 0.55;
       dx = s.eyeDx;
       dy += s.eyeDy;
     } else if (i === MOUTH_INDEX) {
@@ -185,10 +185,11 @@ function renderFace(s) {
     }
     ctx.globalAlpha = s.reveals[i];
     if (ctx.globalAlpha > 0.01) {
-      if (i === MOUTH_INDEX && s.mouthScale !== 1.0) {
+      if ((i === MOUTH_INDEX && s.mouthScale !== 1.0) || (EYE_INDICES.has(i) && closed)) {
         ctx.save();
         ctx.translate(p.x + dx + s.faceDx, p.y + s.bobY + dy + s.faceDy);
-        ctx.scale(s.mouthScale, 1.0);
+        if (EYE_INDICES.has(i) && closed) ctx.scale(0.5, 1.0);
+        else ctx.scale(s.mouthScale, 1.0);
         ctx.fillText(ch, 0, 0);
         ctx.restore();
       } else {

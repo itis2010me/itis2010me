@@ -4,7 +4,9 @@
 
   const pageKey = 'typed_' + location.pathname;
   const navEntry = performance.getEntriesByType('navigation')[0];
-  if (navEntry && navEntry.type === 'reload') sessionStorage.removeItem(pageKey);
+  const isReload = (navEntry && navEntry.type === 'reload') ||
+                   performance.navigation.type === 1;
+  if (isReload) sessionStorage.removeItem(pageKey);
   if (sessionStorage.getItem(pageKey)) return;
   sessionStorage.setItem(pageKey, '1');
 
