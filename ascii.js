@@ -100,12 +100,23 @@ function getState(t) {
   let bobY = 0;
 
   let targetNx, targetNy;
+  const waveNx = Math.sin(t * 0.4) * 0.6 + Math.sin(t * 0.17) * 0.3;
+  const waveNy = Math.sin(t * 0.27 + 1.0) * 0.4 + Math.sin(t * 0.13 + 0.5) * 0.2;
   if (HAS_FINE_POINTER) {
-    targetNx = Math.max(-1, Math.min(1, (cursor.x - window.innerWidth / 2) / (window.innerWidth / 2)));
-    targetNy = Math.max(-1, Math.min(1, (cursor.y - window.innerHeight / 2) / (window.innerHeight / 2)));
+    const INTRO_WAVE = 5.0;
+    const INTRO_FADE = 0.8;
+    const sinceBoot = Math.max(0, t - BOOT);
+    let blend;
+    if (sinceBoot < INTRO_WAVE) blend = 0;
+    else if (sinceBoot < INTRO_WAVE + INTRO_FADE) blend = (sinceBoot - INTRO_WAVE) / INTRO_FADE;
+    else blend = 1;
+    const cursorNx = Math.max(-1, Math.min(1, (cursor.x - window.innerWidth / 2) / (window.innerWidth / 2)));
+    const cursorNy = Math.max(-1, Math.min(1, (cursor.y - window.innerHeight / 2) / (window.innerHeight / 2)));
+    targetNx = waveNx * (1 - blend) + cursorNx * blend;
+    targetNy = waveNy * (1 - blend) + cursorNy * blend;
   } else {
-    targetNx = Math.sin(t * 0.4) * 0.6 + Math.sin(t * 0.17) * 0.3;
-    targetNy = Math.sin(t * 0.27 + 1.0) * 0.4 + Math.sin(t * 0.13 + 0.5) * 0.2;
+    targetNx = waveNx;
+    targetNy = waveNy;
   }
   easedNx += (targetNx - easedNx) * GAZE_EASE;
   easedNy += (targetNy - easedNy) * GAZE_EASE;
