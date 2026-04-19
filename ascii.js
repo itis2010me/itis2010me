@@ -4,11 +4,11 @@ const MOUTH_INDEX = 2;
 const GRID_W = 56;
 const GRID_H = 26;
 const RAMP = ' .:-=+*#%@';
-const FPS = 30;
+const FPS = 60;
 const FRAME_MS = 1000 / FPS;
 
-const SS_X = 2;
-const SS_Y = 4;
+const SS_X = 4;
+const SS_Y = 8;
 const CV_W = GRID_W * SS_X;
 const CV_H = GRID_H * SS_Y;
 
@@ -46,33 +46,39 @@ const charPositions = [];
 
 const out = document.getElementById('out');
 
+const HAS_FINE_POINTER = window.matchMedia('(pointer: fine)').matches;
+
 const cursor = {
   x: window.innerWidth / 2,
   y: window.innerHeight / 2,
 };
 
-window.addEventListener('mousemove', e => {
-  cursor.x = e.clientX;
-  cursor.y = e.clientY;
-});
-
-window.addEventListener('mouseleave', () => {
-  cursor.x = window.innerWidth / 2;
-  cursor.y = window.innerHeight / 2;
-});
+if (HAS_FINE_POINTER) {
+  window.addEventListener('mousemove', e => {
+    cursor.x = e.clientX;
+    cursor.y = e.clientY;
+  });
+  window.addEventListener('mouseleave', () => {
+    cursor.x = window.innerWidth / 2;
+    cursor.y = window.innerHeight / 2;
+  });
+}
 
 const GAZE_EASE = 0.12;
 const EYE_MAX_DX = 4.5;
 const EYE_MAX_DY = 2.5;
+const FACE_MAX_DX = 2.5;
+const FACE_MAX_DY = 1.5;
 let easedNx = 0;
 let easedNy = 0;
 
 function gazeToMouth(nx) {
-  if (nx < -0.55) return 'L';
-  if (nx < -0.2) return 'l';
-  if (nx < 0.2) return 'i';
-  if (nx < 0.55) return 'j';
-  return 'J';
+  if (nx < -0.7) return { ch: 'L', scale: 1.0 };
+  if (nx < -0.4) return { ch: 'L', scale: 0.62 };
+  if (nx < -0.15) return { ch: 'l', scale: 1.0 };
+  if (nx < 0.15) return { ch: 'i', scale: 1.0 };
+  if (nx < 0.55) return { ch: 'j', scale: 1.0 };
+  return { ch: 'J', scale: 1.0 };
 }
 
 function getState(t) {
@@ -85,13 +91,22 @@ function getState(t) {
   let blink = 0;
   let eyeDx = 0;
   let eyeDy = 0;
+  let faceDx = 0;
+  let faceDy = 0;
   let mouth = 'L';
+  let mouthScale = 1.0;
   let leftEye = null;
   let rightEye = null;
   let bobY = 0;
 
-  const targetNx = Math.max(-1, Math.min(1, (cursor.x - window.innerWidth / 2) / (window.innerWidth / 2)));
-  const targetNy = Math.max(-1, Math.min(1, (cursor.y - window.innerHeight / 2) / (window.innerHeight / 2)));
+  let targetNx, targetNy;
+  if (HAS_FINE_POINTER) {
+    targetNx = Math.max(-1, Math.min(1, (cursor.x - window.innerWidth / 2) / (window.innerWidth / 2)));
+    targetNy = Math.max(-1, Math.min(1, (cursor.y - window.innerHeight / 2) / (window.innerHeight / 2)));
+  } else {
+    targetNx = Math.sin(t * 0.4) * 0.6 + Math.sin(t * 0.17) * 0.3;
+    targetNy = Math.sin(t * 0.27 + 1.0) * 0.4 + Math.sin(t * 0.13 + 0.5) * 0.2;
+  }
   easedNx += (targetNx - easedNx) * GAZE_EASE;
   easedNy += (targetNy - easedNy) * GAZE_EASE;
 
@@ -100,7 +115,11 @@ function getState(t) {
 
     eyeDx = easedNx * EYE_MAX_DX;
     eyeDy = easedNy * EYE_MAX_DY;
-    mouth = gazeToMouth(easedNx);
+    faceDx = easedNx * FACE_MAX_DX;
+    faceDy = easedNy * FACE_MAX_DY;
+    const m = gazeToMouth(easedNx);
+    mouth = m.ch;
+    mouthScale = m.scale;
 
     const blinkPhase = tt % 3.7;
     if (blinkPhase < 0.18) {
@@ -111,7 +130,7 @@ function getState(t) {
     if (winkPhase < 0.32) leftEye = '-';
   }
 
-  return { reveals, blink, eyeDx, eyeDy, mouth, leftEye, rightEye, bobY };
+  return { reveals, blink, eyeDx, eyeDy, faceDx, faceDy, mouth, mouthScale, leftEye, rightEye, bobY };
 }
 
 function renderFace(s) {
@@ -145,7 +164,15 @@ function renderFace(s) {
     }
     ctx.globalAlpha = s.reveals[i];
     if (ctx.globalAlpha > 0.01) {
-      ctx.fillText(ch, p.x + dx, p.y + s.bobY + dy);
+      if (i === MOUTH_INDEX && s.mouthScale !== 1.0) {
+        ctx.save();
+        ctx.translate(p.x + dx + s.faceDx, p.y + s.bobY + dy + s.faceDy);
+        ctx.scale(s.mouthScale, 1.0);
+        ctx.fillText(ch, 0, 0);
+        ctx.restore();
+      } else {
+        ctx.fillText(ch, p.x + dx + s.faceDx, p.y + s.bobY + dy + s.faceDy);
+      }
     }
   }
   ctx.globalAlpha = 1;
