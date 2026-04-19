@@ -48,6 +48,10 @@ const out = document.getElementById('out');
 
 const HAS_FINE_POINTER = window.matchMedia('(pointer: fine)').matches;
 
+const IS_RETURN_VISIT = sessionStorage.getItem('mascotSeen') === '1';
+sessionStorage.setItem('mascotSeen', '1');
+const INTRO_WAVE = IS_RETURN_VISIT ? 2.0 : 5.0;
+
 const cursor = {
   x: window.innerWidth / 2,
   y: window.innerHeight / 2,
@@ -68,7 +72,7 @@ const GAZE_EASE = 0.12;
 const EYE_MAX_DX = 4.5;
 const EYE_MAX_DY = 2.5;
 const FACE_MAX_DX = 2.5;
-const FACE_MAX_DY = 1.5;
+const FACE_MAX_DY = 3.0;
 let easedNx = 0;
 let easedNy = 0;
 
@@ -103,7 +107,6 @@ function getState(t) {
   const waveNx = Math.sin(t * 0.4) * 0.6 + Math.sin(t * 0.17) * 0.3;
   const waveNy = Math.sin(t * 0.27 + 1.0) * 0.4 + Math.sin(t * 0.13 + 0.5) * 0.2;
   if (HAS_FINE_POINTER) {
-    const INTRO_WAVE = 5.0;
     const INTRO_FADE = 0.8;
     const sinceBoot = Math.max(0, t - BOOT);
     let blend;
@@ -135,6 +138,13 @@ function getState(t) {
     const blinkPhase = tt % 3.7;
     if (blinkPhase < 0.18) {
       blink = Math.sin(blinkPhase / 0.18 * Math.PI);
+    }
+
+    const doublePhase = tt % 15.0;
+    if (doublePhase < 0.15) {
+      blink = Math.max(blink, Math.sin(doublePhase / 0.15 * Math.PI));
+    } else if (doublePhase > 0.23 && doublePhase < 0.38) {
+      blink = Math.max(blink, Math.sin((doublePhase - 0.23) / 0.15 * Math.PI));
     }
 
     const winkPhase = (tt + 1.4) % 9.0;
