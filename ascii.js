@@ -15,7 +15,9 @@ const CV_H = GRID_H * SS_Y;
 const canvas = document.createElement('canvas');
 canvas.width = CV_W;
 canvas.height = CV_H;
-const ctx = canvas.getContext('2d');
+// sampleFace reads this canvas back every frame; the hint keeps Chrome on a
+// CPU-backed surface instead of paying a GPU readback per getImageData call.
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 const fontFamily = '"Arial Black", "Impact", "Helvetica Neue", sans-serif';
 let fontSize = Math.floor(CV_H * 1.0);
@@ -85,7 +87,7 @@ function gazeToMouth(nx) {
   return { ch: 'J', scale: 1.0 };
 }
 
-function getState(t) {
+function getState(t, dtSec) {
   const BOOT = 1.6;
   const reveals = TEXT_CHARS.map((_, i) => {
     const delay = i * 0.25;
@@ -121,8 +123,11 @@ function getState(t) {
     targetNx = waveNx;
     targetNy = waveNy;
   }
-  easedNx += (targetNx - easedNx) * GAZE_EASE;
-  easedNy += (targetNy - easedNy) * GAZE_EASE;
+  // Frame-rate independent easing: GAZE_EASE is the per-60fps-frame rate, so
+  // a longer frame eases proportionally further rather than slowing the gaze.
+  const ease = 1 - Math.pow(1 - GAZE_EASE, (dtSec || 0) * 60);
+  easedNx += (targetNx - easedNx) * ease;
+  easedNy += (targetNy - easedNy) * ease;
 
   if (t > BOOT) {
     const tt = t - BOOT;
@@ -164,40 +169,48 @@ function renderFace(s) {
 
   for (let i = 0; i < charPositions.length; i++) {
     const p = charPositions[i];
-    let ch = p.char;
-    let dx = 0;
-    let dy = 0;
-    let closed = false;
+    const reveal = s.reveals[i];
+    if (reveal <= 0.01) continue;
+
+    const faceX = p.x + s.faceDx;
+    const faceY = p.y + s.bobY + s.faceDy;
+
     if (EYE_INDICES.has(i)) {
       const override = i === 1 ? s.leftEye : s.rightEye;
+      const eyeX = faceX + s.eyeDx;
+      const eyeY = faceY + s.eyeDy;
       if (override !== null) {
-        ch = override;
-        if (override === '-' || override === '_') closed = true;
-      } else if (s.blink > 0.3) {
-        ch = '_';
-        closed = true;
-      }
-      if (closed) dy = -fontSize * 0.55;
-      dx = s.eyeDx;
-      dy += s.eyeDy;
-    } else if (i === MOUTH_INDEX) {
-      ch = s.mouth;
-    }
-    ctx.globalAlpha = s.reveals[i];
-    if (ctx.globalAlpha > 0.01) {
-      if ((i === MOUTH_INDEX && s.mouthScale !== 1.0) || (EYE_INDICES.has(i) && closed)) {
-        ctx.save();
-        ctx.translate(p.x + dx + s.faceDx, p.y + s.bobY + dy + s.faceDy);
-        if (EYE_INDICES.has(i) && closed) ctx.scale(0.5, 1.0);
-        else ctx.scale(s.mouthScale, 1.0);
-        ctx.fillText(ch, 0, 0);
-        ctx.restore();
+        const shut = override === '-' || override === '_';
+        drawGlyph(override, eyeX, eyeY + (shut ? -fontSize * 0.55 : 0), shut ? 0.5 : 1, reveal);
       } else {
-        ctx.fillText(ch, p.x + dx + s.faceDx, p.y + s.bobY + dy + s.faceDy);
+        // Cross-fade the open eye into the closed one along the blink curve.
+        // Thresholding it (the old `blink > 0.3`) threw away the smooth easing
+        // that getState already computes and snapped the lid in one frame.
+        const b = s.blink;
+        drawGlyph(p.char, eyeX, eyeY, 1, reveal * (1 - b));
+        drawGlyph('_', eyeX, eyeY - fontSize * 0.55, 0.5, reveal * b);
       }
+    } else if (i === MOUTH_INDEX) {
+      drawGlyph(s.mouth, faceX, faceY, s.mouthScale, reveal);
+    } else {
+      drawGlyph(p.char, faceX, faceY, 1, reveal);
     }
   }
   ctx.globalAlpha = 1;
+}
+
+function drawGlyph(ch, x, y, scaleX, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = alpha;
+  if (scaleX === 1) {
+    ctx.fillText(ch, x, y);
+  } else {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scaleX, 1);
+    ctx.fillText(ch, 0, 0);
+    ctx.restore();
+  }
 }
 
 function canvasToAscii() {
@@ -232,10 +245,14 @@ function tick(now) {
   if (lastTick < 0) lastTick = now;
   if (!paused) {
     const dt = now - lastTick;
-    if (dt >= FRAME_MS) {
+    // Cap at ~60fps, but compare against a slightly relaxed threshold. Testing
+    // an exact 16.667ms makes real vsync deltas land fractionally under it, so
+    // every other frame is dropped -- ~39fps with alternating 16.7/33.3ms gaps,
+    // which reads as judder. The tolerance still halves 120Hz cleanly to 60.
+    if (dt >= FRAME_MS * 0.9) {
       elapsed += dt / 1000;
       lastTick = now;
-      renderFace(getState(elapsed));
+      renderFace(getState(elapsed, dt / 1000));
       out.textContent = canvasToAscii();
     }
   } else {
@@ -250,9 +267,16 @@ out.textContent = canvasToAscii();
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   requestAnimationFrame(tick);
 } else {
-  renderFace(getState(10));
+  // Large delta so the eased gaze converges: this is a single settled pose.
+  renderFace(getState(10, 1));
   out.textContent = canvasToAscii();
 }
 
-window.addEventListener('blur', () => { paused = true; });
-window.addEventListener('focus', () => { paused = false; lastTick = -1; });
+// Pause only when the tab is actually hidden, not merely unfocused -- the
+// mascot should keep animating while it is still on screen behind another
+// window. (Browsers stop rAF for hidden tabs anyway; this mainly keeps `elapsed`
+// from leaping forward by the whole time spent away once the tab returns.)
+document.addEventListener('visibilitychange', () => {
+  paused = document.hidden;
+  if (!paused) lastTick = -1;
+});
