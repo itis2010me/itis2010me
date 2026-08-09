@@ -14,12 +14,15 @@
     const t=localStorage.getItem('theme');
     if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))
       document.documentElement.setAttribute('data-theme','dark');
+    if(sessionStorage.getItem('pt-state')){
+      document.documentElement.classList.add('pt-incoming');
+      /* Failsafe: pt-incoming hides the body until the curtain paints. If
+         transition.js never runs, this stops the page being blank forever. */
+      addEventListener('load',function(){
+        document.documentElement.classList.remove('pt-incoming');
+      });
+    }
   </script>
-  <style>
-    @view-transition { navigation: auto; }
-    .greeting { view-transition-name: site-title; }
-    .nav { view-transition-name: site-nav; }
-  </style>
   <link rel="stylesheet" href="ascii.css" blocking="render">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
@@ -33,7 +36,12 @@
   <pre id="out" aria-label="|'L'|"></pre>
   <footer class="footer landing-footer">Merlin Chang © 2026</footer>
   <button id="theme-toggle" class="dark-toggle" aria-label="Toggle dark mode"></button>
-  <script src="ascii.js" defer></script>
   <script src="theme.js"></script>
+  <!-- Curtain first: deferred scripts run in order, and the mascot's setup
+       (font measuring, face render, getImageData) would otherwise delay the
+       incoming reveal on every navigation back to this page. -->
+  <script src="glyph-atlas.js" defer></script>
+  <script src="transition.js" defer></script>
+  <script src="ascii.js" defer></script>
 </body>
 </html>
