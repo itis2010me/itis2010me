@@ -4,3 +4,7 @@ cv.log
 cv.synctex.gz
 *.log
 */*.log
+
+# Local agent notes, not part of the site
+CLAUDE.md
+.claude/
