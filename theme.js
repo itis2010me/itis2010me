@@ -27,7 +27,19 @@ function setTheme(dark) {
 
 toggle.addEventListener('click', () => {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  setTheme(!isDark);
+  const next = !isDark;
+
+  // Ripple the new theme out from the toggle when the curtain is available.
+  // It flips the theme itself at full cover; falling through means switching
+  // instantly (curtain not loaded, reduced motion, or one already running).
+  const curtain = window.AsciiCurtain;
+  if (curtain && curtain.themeSweep && curtain.themeSweep({
+    theme: next ? 'dark' : 'light',
+    origin: toggle,
+    apply: () => setTheme(next),
+  })) return;
+
+  setTheme(next);
 });
 
 const saved = localStorage.getItem('theme');
