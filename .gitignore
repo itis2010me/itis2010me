@@ -1,9 +1,14 @@
 .DS_Store
 *.exe
-cv.log
-cv.synctex.gz
 *.log
 */*.log
+
+# LaTeX build artifacts
+*.aux
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz
 
 # Local agent notes, not part of the site
 CLAUDE.md
