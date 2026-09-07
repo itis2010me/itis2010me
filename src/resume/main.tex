@@ -77,7 +77,7 @@
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
 
 \newcommand{\resumeRoleOnly}[2]{
-  \vspace{2pt}\item[]
+  \vspace{-5pt}\item[]
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textit{#1} & \textit{#2} \\
     \end{tabular*}\vspace{-5pt}
@@ -104,13 +104,13 @@
   \makebox[4.8em][l]{Website:}\href{https://itis2010me.github.io/itis2010me/}{itis2010me.github.io/itis2010me} \\
 \end{tabular*}
 
+\vspace{-4pt}
 \section{Experience}
   \resumeSubHeadingListStart
-
 \resumeSubheadingTwoRoles
         {Amazon Web Services (AWS) - Automated Reasoning Group}{Seattle, WA}
-    {Software Development Engineer II}{July 2026 - Present}
-    {Software Development Engineer I}{Feb 2025 - July 2026}
+    {Software Development Engineer II}{Jul 2026 - Present}
+    {Software Development Engineer I}{Feb 2025 - Jul 2026}
     \resumeItemListStart
         \item Built an AI agent tool call evaluation system using formal policies such as Dogwood to improve agent safety.
         \item Raised the compute fleet scaling ceiling by 20x (3k to 60k) and cut per-unit scale-up time by 60x through a backend migration of a highly concurrent, distributed service to Firecracker microVMs.
@@ -119,20 +119,18 @@
         \item Raised the team's operational bar with a fault injection framework, regular game days, and ordered, automated deployment sequencing that removed cross-pipeline dependencies.
         \item Mentored junior engineers and interns through design and code review, scoping and guiding an intern project that converted to a full-time offer.
     \resumeItemListEnd
-
     \resumeSubheading{Amazon Web Services (AWS) - High Performance Computing}{Seattle, WA}
     {Software Development Engineer I}{Apr 2024 - Feb 2025}
     \resumeItemListStart
         \item Shipped AWS Parallel Computing Service (PCS), a public managed HPC service, as part of the launch team, building across the AWS Console frontend, the backend service APIs, and the workflows that provisioned customer compute clusters.
     \resumeItemListEnd
-    \resumeRoleOnly{Software Development Engineer Intern}{June 2023 - Sep 2023}
+    \resumeRoleOnly{Software Development Engineer Intern}{Jun 2023 - Sep 2023}
     \resumeItemListStart
         \item Designed internal RESTful APIs and orchestration that collapsed multi-step cluster configuration and job scheduling into single API invocations.
         \item Shipped a public AWS CLI command exposing the managed HPC service directly to enterprise customers.
     \resumeItemListEnd
-
     \resumeSubheading{UC Davis Applied Mathematics Research Group}{Davis, CA}
-    {Research Assistant \& Software Engineer}{June 2021 - June 2022}
+    {Research Assistant \& Software Engineer}{Jun 2021 - Jun 2022}
     \resumeItemListStart
         \item Developed automated reasoning pipeline that computed undiscovered Ramsey constants.
         \item Reduced the search space by 6x through symmetry breaking and optimization techniques in preprocessing.
@@ -149,7 +147,7 @@
 % \vspace{-5pt}
   %   \resumeSubheading
 		% {International Family Union}{Remote}
-		% {Teaching Associate (Part-time)}{June 2020 - Jan 2021}
+		% {Teaching Associate (Part-time)}{Jun 2020 - Jan 2021}
 		% \resumeItemListStart
         % \resumeItem{Project Course - Find Movie Similarity from Plot Summaries}
         %   {Created project based course using Unsupervised learning and natural language processing.}
@@ -160,19 +158,18 @@
   %       \item Designed and taught areas such as Unix/Bash commands, C++, algorithms and abstract data structures. 
   %       \item Introduced advanced topics such as dynamic-memory management and recursion, as preparation for future courses. 
 		% \resumeItemListEnd
-
 \vspace{-4pt}
-
 \resumeSubHeadingListEnd
+\vspace{-1pt}
 
 \section{Technical Skills}
 	\resumeSubHeadingListStart
 	\resumeSkill{Languages}{Java, TypeScript, Bash, Rust, Python}
-	\resumeSkill{Distributed Systems}{REST APIs, NoSQL, Firecracker microVMs, containerization, image-based deployment}
-	\resumeSkill{Cloud \& Build}{AWS (Lambda, ECS, SQS, DynamoDB, ElastiCache, S3, ELB), build systems, CI/CD tooling}
+	\resumeSkill{Distributed Systems}{REST APIs, NoSQL, Firecracker microVMs, containerization (Docker), image-based deployment}
+	\resumeSkill{Cloud \& Build}{AWS (Lambda, ECS, SQS, DynamoDB, ElastiCache, S3, ELB), build systems, CI/CD tooling, Git}
 	\resumeSkill{Agentic AI}{MCP servers, agent skills, steering docs, Claude Code, Kiro}
     \resumeSubHeadingListEnd
-    \vspace{-5pt}
+\vspace{-4pt}
 
 
 %-----------EDUCATION-----------------
@@ -184,12 +181,12 @@
         % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Courses:} Probabilistic Reasoning, Software Engineering, Reinforcement Learning, NLP, Convex Optimization, Recommender Systems, Unsupervised Learning, Online Optimization, Human Centered Programming.}}}
     \resumeSubheading
       {University of California, Davis}{Davis, CA}
-      % {Bachelor of Science - Computer Science;  GPA: 3.9/4.0; Graduated with Honors}{Sept 2018 - June 2022}
+      % {Bachelor of Science - Computer Science;  GPA: 3.9/4.0; Graduated with Honors}{Sep 2018 - Jun 2022}
     {Bachelor of Science - Computer Science, Minor in Mathematics; Graduated with Honors}{2018 - 2022}
       % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Minor:} Mathematics (Number Theory, Modern Algebra, Linear Algebra, Numerical Optimization \& Scientific Computation)}}}
       % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Courses:} Operating Systems, Data Structures, Algorithms Design, Artificial Intelligence, Machine Learning, Computer Architecture.}}}
-      
     \resumeSubHeadingListEnd
+\vspace{-3pt}
     
 	    
 % \vspace{-5pt}
@@ -204,19 +201,18 @@
 \item \textbf{Rado Numbers and SAT Computations (with J. A. De Loera and W. J. Wesley).}\\ Proceedings of the 47th International Symposium on Symbolic and Algebraic Computation (ISSAC 2022). Pages 333-342, available online at \href{https://dl.acm.org/doi/10.1145/3476446.3535494}{https://dl.acm.org/doi/10.1145/3476446.3535494}.
 % \vspace{2pt}
 \resumeSubHeadingListEnd
+\vspace{-7pt}
 
 
 
 
-\vspace{-5pt}
 
 %-----------PROJECTS-----------------
-\vspace{-5pt}
 \section{Projects}
 \resumeSubHeadingListStart
 \resumeSubItem{Computations with Rado Numbers and Degree of Regularity (Automated Reasoning, Theory of Computation, Number Theory, Combinatorics)}{Advancement in terms of Rado Numbers and the degree of regularity. Discovery of nearly 500 new mathematical constants. Results collected and formulated into research paper accepted into 2022 ISSAC conference. Co-author with Prof. Jes\'{u}s De Loera and William Wesley. \href{https://github.com/itis2010me/Ramsey_Research}{Github Link}}
 \vspace{2pt}
-\resumeSubItem{Minimization of CA Wildfire Impact (Web Mining, Convex Optimization, KKT, Lagrangian, Data Analysis)}{Built a connectivity matrix of CA counties from humidity and fire probability, formulated wildfire prioritization as a constrained optimization problem, and solved it with integer programming over 2021 data to rank counties by financial, social and geological impact.}
+\resumeSubItem{Minimization of CA Wildfire Impact (Convex Optimization, CVXPY)}{Prioritized fire suppression across 58 CA counties under budget constraints via the Lagrangian dual, KKT conditions, and a near-integral convex relaxation.}
 \vspace{2pt}
 \resumeSubItem{Terminal UI Board-game In Haskell (Haskell, Functional Programming, QuickCheck, Genetic Algorithm)}{TUI implementation of the classic board-game Mastermind in Haskell, using monadic and functional programming, with 10 QuickCheck property tests and a genetic-algorithm AI player built on minimax. \href{https://github.com/itis2010me/CSE230MM}{Github Link}}
 \vspace{2pt}
@@ -225,7 +221,7 @@
 % \resumeSubItem{Digit Recognition with MNIST Dataset of Handwritten Digits(PCA, Centroid Algorithm)}{Analyzed and implemented Centroid and PCA algorithms in MATLAB for hand-written digit recognition. Training data set over 60,000 digits and testing data set over 10,000. Achieved overall success rate of around 85\%. (2022)}
 % \resumeSubItem{Robotic Arm Project(Algebraic Geometry, Grobner Bases, Automatic Theorem Proving, Kinematic Problem)}{Study of a specialized 2 segments robotic arm with computational geometric algebra. Analysis of many real life robotic arm problems such as kinematics singularity and reversed kinematics problems. Cross referenced with 3 industry research papers. \href{https://itis2010me.github.io/itis2010me/src/Sample\%20project.pdf}{Paper Link} (2020)}
 \resumeSubHeadingListEnd
-\vspace{-5pt}
+\vspace{-2pt}
 
 %-----------Awards-----------------
 % \section{Honors and Awards}
@@ -236,7 +232,6 @@
 % \vspace{-5pt}
 % \end{description}
 
-\vspace{-5pt}
 
 
 \end{document}
