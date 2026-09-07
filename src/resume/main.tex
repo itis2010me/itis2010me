@@ -64,7 +64,19 @@
 }
 
 
+\newcommand{\resumeSubheadingTwoRoles}[6]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \hspace*{1em}\textit{#3} & \textit{#4} \\
+      \hspace*{1em}\textit{#5} & \textit{#6} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
+
+\newcommand{\resumeSkill}[2]{\item\small{\makebox[11.5em][l]{\textbf{#1}}#2}\vspace{-3pt}}
 
 \renewcommand{\labelitemii}{$\circ$}
 
@@ -80,13 +92,13 @@
 
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{{\LARGE Yuan Chang (Merlin)}} & Email: \href{mailto:}{merlin.y.chang@gmail.com}\\
+  \textbf{{\LARGE Yuan Chang (Merlin)}} & Email: \href{mailto:merlin.y.chang@gmail.com}{merlin.y.chang@gmail.com}\\
   \href{https://itis2010me.github.io/itis2010me/}{Portfolio: itis2010me.github} & Mobile:+1 (530) 760 6690 \\
   \href{https://github.com/itis2010me}{Github: ~~github.com/itis2010me} \\
 \end{tabular*}
 
 %-----------EDUCATION-----------------
-\section{~~Education}
+\section{Education}
   \resumeSubHeadingListStart
     \resumeSubheading
         {University of California, San Diego}{La Jolla, California}
@@ -95,8 +107,7 @@
     \resumeSubheading
       {University of California, Davis}{Davis, California}
       % {Bachelor of Science - Computer Science;  GPA: 3.9/4.0; Graduated with Honors}{Sept 2018 - June 2022}
-    {Bachelor of Science - Computer Science; Graduated with Honors}{2018 - 2022}   
-        {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Minor:} Mathematics}}}
+    {Bachelor of Science - Computer Science, Minor in Mathematics; Graduated with Honors}{2018 - 2022}
       % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Minor:} Mathematics (Number Theory, Modern Algebra, Linear Algebra, Numerical Optimization \& Scientific Computation)}}}
       % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Courses:} Operating Systems, Data Structures, Algorithms Design, Artificial Intelligence, Machine Learning, Computer Architecture.}}}
       
@@ -105,48 +116,54 @@
 	    
 % \vspace{-5pt}
 
-\section{Experiences \& Internships}
+\section{Experience}
   \resumeSubHeadingListStart
 
-\resumeSubheading
-        {Amazon Web Services (AWS)}{Seattle, WA}
-    {Software Developer Engineer}{Apr 2024 - \textbf{Present}}
-    % \resumeItemListStart
-        % \item Developed automated reasoning pipeline that computed undiscovered Ramsey constants.
-        % \item Utilized symmetric breaking and optimization techniques to reduce the search space by 6x with preprocessing.
-        % \item Optimized the computation to achieve up to 10x improvements in source generation.
-        % \item Leveraged parallel computing to speedup SAT computation time by 2x. 
-        % \item Research paper and artifacts published on \textit{ACM (ISSAC 2022)}.
-      % \resumeItemListEnd
+\resumeSubheadingTwoRoles
+        {Amazon Web Services (AWS) - Automated Reasoning Group}{Seattle, WA}
+    {Software Development Engineer II}{July 2026 - Present}
+    {Software Development Engineer I}{Feb 2025 - July 2026}
+    \resumeItemListStart
+        \item Building a system that evaluates AI agent actions against Cedar and Dogwood policies to improve agent safety.
+        \item Migrated the service architecture to Firecracker microVMs, raising the compute fleet scaling ceiling 20x and cutting per-unit scale-up time from minutes to seconds.
+        \item Built stateful MCP servers exposing remote automated-reasoning solvers and provers (SAT, SMT, LEAN) to internal services and agents.
+        \item Improved availability during outages with automatic load balancing driven by deep health checks.
+        \item Cut recurring pages by hardening the service's handling of asynchronous AWS ECS events.
+        \item Mentored junior engineers and an intern who converted to full-time; ran the team's operational reviews.
+    \resumeItemListEnd
 
-		\resumeSubheading {Amazon AWS}{Seattle, WA}
-		{Software Developer Engineer Intern (High Performance Computing group)}{June 2023 - Sep 2023}
+    \resumeSubheading{Amazon Web Services (AWS) - High Performance Computing}{Seattle, WA}
+    {Software Development Engineer I}{Apr 2024 - Feb 2025}
+    \resumeItemListStart
+        \item Helped launch AWS Parallel Computing Service (PCS), a public AWS service for managed HPC clusters.
+        \item Delivered features spanning the AWS Console frontend, the backend service APIs, and the workflows that provisioned customer compute clusters.
+    \resumeItemListEnd
+
+    \resumeSubheading{UC San Diego, Halıcıoğlu Data Science Institute}{La Jolla, California}
+    {Graduate Teaching Assistant - \href{https://jimwang123.github.io/DSC_211.html}{DSC 211: Introduction to Optimization}}{Jan 2024 - Mar 2024}
+
+		\resumeSubheading {Amazon Web Services (AWS)}{Seattle, WA}
+		{Software Development Engineer Intern (High Performance Computing group)}{June 2023 - Sep 2023}
 		\resumeItemListStart
-        % \resumeItem{Project Course - Find Movie Similarity from Plot Summaries}
-        %   {Created project based course using Unsupervised learning and natural language processing.}
-        % \resumeItem{Tutorial - Introduction to Reinforcement Learning}
-        %   {Created tutorial for Q-learning RL algorithm and  concepts.}
-        % \resumeItem{Impact}{Course has been taken by 250+ students so far with 4.65 average rating.}
+        \item Designed internal RESTful APIs and orchestration that collapsed multi-step cluster configuration and job scheduling into single API invocations.
+        \item Shipped a public AWS CLI command exposing the service directly to customers.
+        % --- trimmed Sep 2026; kept for reference ---
+        % \item Developed database managers which queried a single-table DynamoDB storing both cluster and node level data.
+        % \item Simplified dependency graph within the team project and incorporated dependency injections to handle complex and nested object-oriented codebase.
+        % \item Incorporated unit, integration and load tests into the CI/CD production pipeline which achieved over 85\% test coverage to ensure workflow validity.
         % \item Part of the High Performance Computing team that delivers large scale computing clusters for complex workflows.
-        \item Designed and implemented internal Restful APIs that configure computing instances with cluster management and job scheduling systems.
-        \item Developed public API within AWS CLI to enable direct interactions of our service for customers.
-        \item Developed database managers which queried a single-table DynamoDB storing both cluster and node level data.
-        \item Simplified dependency graph within the team project and incorporated dependency injections to handle complex and nested object-oriented codebase. 
-        \item Implemented API orchestration that simplified complex distributed workloads into a simple and seamless API invocation. 
-        \item Incorporated unit, integration and load tests into the CI/CD production pipeline which achieved over 85\% test coverage to ensure workflow validity.
         % \item Cross-teams collaboration to deliver seamless integration of workflows and secure API consumption.
         % \item AWS Tools involved: Lambda, DynamoDB, CDK, EC2, S3 storage, ECR.
-        % \item I'm part of the AWS High Performance Computing(HPC) group, currently working on implementing workflows that configure computing instances with cluster management and job scheduling system in the HPC services. Designing comprehensive unit test and integration test to ensure workflow validity. 
 		\resumeItemListEnd
   
     \resumeSubheading{UC Davis Applied Mathematics Research Group}{Davis, CA}
     {Research Assistant \& Software Engineer}{June 2021 - June 2022}
     \resumeItemListStart
         \item Developed automated reasoning pipeline that computed undiscovered Ramsey constants.
-        \item Utilized symmetric breaking and optimization techniques to reduce the search space by 6x with preprocessing.
-        \item Optimized the computation to achieve up to 10x improvements in source generation.
-        \item Leveraged parallel computing to speedup SAT computation time by 2x. 
-        \item Research paper and artifacts published on \textit{ACM (ISSAC 2022)}.
+        \item Applied symmetry breaking and optimization techniques to reduce the search space by 6x with preprocessing.
+        \item Optimized the computation to achieve up to 10x improvements in SAT clause generation.
+        % \item Leveraged parallel computing to speedup SAT computation time by 2x.
+        % \item Research paper and artifacts published in the ACM proceedings (\textit{ISSAC 2022}).
         % \item Research conducted under the supervision of Prof. Jes\'{u}s De Loera and William Wesley. 
         % \resumeItem{Discussion Forum Upgrades}
         %   {Refactor forum for performance to handle large databases.}
@@ -177,17 +194,15 @@
 \vspace{-5pt}
 \section{Projects}
 \resumeSubHeadingListStart
-\resumeSubItem{Minimization of CA Wildfire Impact(Web Mining, Convex Optimization, KKT, Lagrangian, Data Analysis)}{Constructed connectivity matrix of CA counties based on humidity and fire probability. Formulated the CA wildfire problem into a constraint optimization problem and solved through integer programming techniques. Computed counties with highest priorities based on 2021's historical data, while minimizing each counties' financial, social and geological impact.(2023)}
+\resumeSubItem{Minimization of CA Wildfire Impact(Web Mining, Convex Optimization, KKT, Lagrangian, Data Analysis)}{Built a connectivity matrix of CA counties from humidity and fire probability, formulated wildfire prioritization as a constrained optimization problem, and solved it with integer programming over 2021 data to rank counties by financial, social and geological impact. (2023)}
 \vspace{2pt}
-\resumeSubItem{Terminal UI Board-game In Haskell(Haskell, Functional Programming, QuickCheck, Genetic Algorithm)}{Implementing the TUI version of the classic board-game, Mastermind, in Haskell. Monadic and functional programming. Implemented 10 QuickCheck property testings.
-Implemented genetic algorithm-based AI player using minimax techniques.
-\href{https://github.com/itis2010me/CSE230MM}{Github Link} (2022)}
+\resumeSubItem{Terminal UI Board-game In Haskell(Haskell, Functional Programming, QuickCheck, Genetic Algorithm)}{TUI implementation of the classic board-game Mastermind in Haskell, using monadic and functional programming, with 10 QuickCheck property tests and a genetic-algorithm AI player built on minimax. \href{https://github.com/itis2010me/CSE230MM}{Github Link} (2022)}
 \vspace{2pt}
 % \resumeSubItem{Time Series Analysis on SNP Stock Market(Machine Learning, Data processing, Time Series Models)}{Training polynomial regression and time series models to predict the trend of the SNP stock market. Final model achieved around 90\% accuracy. Project collaborated with 6 other fellow CS students, served as team leader. Produced an interactive model using Flask to output market projections. \href{https://github.com/nfax117/ECS171_Proj1}{Github Link} (2022)}
 % \vspace{2pt}
 % \resumeSubItem{Digit Recognition with MNIST Dataset of Handwritten Digits(PCA, Centroid Algorithm)}{Analyzed and implemented Centroid and PCA algorithms in MATLAB for hand-written digit recognition. Training data set over 60,000 digits and testing data set over 10,000. Achieved overall success rate of around 85\%. (2022)}
 \vspace{2pt}
-\resumeSubItem{Computations with Rado Numbers and Degree of Regularity(Automated Reasoning, Theory of Computation, Number Theory, Combinatorics)}{Advancement in terms of Rado Numbers and the degree of regularity. Discovery of nearly 500 new mathematical constants. Results collected and formulated into research paper accepted into 2022 ISAAC conference. Co-author with Prof. Jes\'{u}s De Loera and William Wesley. \href{https://github.com/itis2010me/Ramsey_Research}{Github Link} (2021)}
+\resumeSubItem{Computations with Rado Numbers and Degree of Regularity(Automated Reasoning, Theory of Computation, Number Theory, Combinatorics)}{Advancement in terms of Rado Numbers and the degree of regularity. Discovery of nearly 500 new mathematical constants. Results collected and formulated into research paper accepted into 2022 ISSAC conference. Co-author with Prof. Jes\'{u}s De Loera and William Wesley. \href{https://github.com/itis2010me/Ramsey_Research}{Github Link} (2021)}
 \vspace{2pt}
 % \resumeSubItem{Robotic Arm Project(Algebraic Geometry, Grobner Bases, Automatic Theorem Proving, Kinematic Problem)}{Study of a specialized 2 segments robotic arm with computational geometric algebra. Analysis of many real life robotic arm problems such as kinematics singularity and reversed kinematics problems. Cross referenced with 3 industry research papers. \href{https://itis2010me.github.io/itis2010me/src/Sample\%20project.pdf}{Paper Link} (2020)}
 \vspace{2pt}
@@ -205,18 +220,7 @@ Implemented genetic algorithm-based AI player using minimax techniques.
 % \vspace{2pt}
 \resumeSubHeadingListEnd
 
-\section{Academia Experience}
-\resumeSubHeadingListStart
-    \resumeSubheading
-    {Graduate Teaching Assistant (Halıcıoğlu Data Science Institute UCSD)}{La Jolla, California}
-    {\href{https://jimwang123.github.io/DSC_211.html}{DSC 211 - Introduction to Optimization.}}{Jan 2024 - Mar 2024}
-    \vspace{-4pt}
- %    \resumeSubheading
- % {UC Davis Undergraduate Research Conference}{Davis, California}
- %    {Ramsey Theory and Automatic Theorem Proving. \href{https://www.math.ucdavis.edu/application/files/7916/3482/8109/chang.pdf}{Presentation Link}.}{Oct 2021} 
-\vspace{2pt}
-    % \vspace{10pt}\textbf{\large{Community Experience}}
-\resumeSubHeadingListEnd
+
 
 
 \vspace{-5pt}
@@ -233,15 +237,12 @@ Implemented genetic algorithm-based AI player using minimax techniques.
 \vspace{-5pt}
 
 
-\section{Technical Skills Summary}
-	\resumeSubHeadingListStart %21+6 char
-	\resumeSubItem{Programming Languages}{~~~~~~~~~~Java, Python,  Typescript, C\texttt{++}, Bash, LEAN}
-	% \resumeSubItem{Languages(Familiar)}{~~~~~~~~Typescript, Haskell, Rust, Swift, Clisp, Prolog, Perl, R, Maple}
-	\resumeSubItem{Libraries/Tools}{~~~~~~~~~~~~~~~~~~~~~~~~Git, pdb, UNIX, SAT/SMT solvers, TensorFlow, pandas, NumPy, SymPy}
-% 	\resumeSubItem{Tools}{~~~~~~~~~~~~~~Kubernetes, Docker, GIT, PostgreSQL, MySQL, SQLite}
-% 	\resumeSubItem{Platforms}{~~~~~~~Linux, Web, Windows, Arduino, Raspberry, AWS, GCP, Alibaba Cloud, IBM Cloud}
-% 	\resumeSubItem{Soft Skills}{~~~~~~~Leadership, Event Management, Writing, Public Speaking, Time Management}
-        \resumeSubItem{Cloud service/Model/Interface}{~AWS, SaaS, IaaS, Restful API, DynamoDB}
+\section{Technical Skills}
+	\resumeSubHeadingListStart
+	\resumeSkill{Languages}{Java, TypeScript, Bash, Rust, Python}
+	\resumeSkill{Distributed Systems}{REST APIs, NoSQL, Firecracker microVMs, containerization, image-based deployment}
+	\resumeSkill{Cloud \& Build}{AWS (Lambda, ECS, SQS, DynamoDB, ElastiCache, S3, ELB), build systems, CI/CD tooling}
+	\resumeSkill{Agentic AI}{MCP servers, agent skills, steering docs, Claude Code, Kiro}
     \resumeSubHeadingListEnd
     \vspace{-5pt}
 
