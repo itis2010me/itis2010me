@@ -5,7 +5,7 @@
 % License : MIT
 %------------------------
 
-\documentclass[a4paper,20pt]{article}
+\documentclass[a4paper]{article}
 
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
@@ -57,7 +57,7 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{#3} & \textit{#4} \\
     \end{tabular*}\vspace{-5pt}
@@ -66,7 +66,7 @@
 
 \newcommand{\resumeSubheadingTwoRoles}[6]{
   \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \hspace*{1em}\textit{#3} & \textit{#4} \\
       \hspace*{1em}\textit{#5} & \textit{#6} \\
@@ -78,7 +78,7 @@
 
 \newcommand{\resumeRoleOnly}[2]{
   \vspace{-5pt}\item[]
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textit{#1} & \textit{#2} \\
     \end{tabular*}\vspace{-5pt}
 }
@@ -100,17 +100,22 @@
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{{\LARGE Yuan (Merlin) Chang}} & Email: \href{mailto:merlin.y.chang@gmail.com}{merlin.y.chang@gmail.com}\\
-  \makebox[4.8em][l]{Github:}\href{https://github.com/itis2010me}{github.com/itis2010me} & Mobile:+1 (530) 760 6690 \\
+  \makebox[4.8em][l]{Github:}\href{https://github.com/itis2010me}{github.com/itis2010me} & Mobile: +1 (530) 760 6690 \\
   \makebox[4.8em][l]{Website:}\href{https://itis2010me.github.io/itis2010me/}{itis2010me.github.io/itis2010me} \\
 \end{tabular*}
 
 \vspace{-4pt}
 \section{Experience}
   \resumeSubHeadingListStart
+    \resumeSubheading{AWS Annapurna Labs - Neuron Automated Reasoning Group}{Seattle, WA}
+    {Software Development Engineer II (Compiler Engineer)}{Oct 2026 -- Present}
+    \resumeItemListStart
+        \item Building simulation of AWS Trainium machine learning accelerator hardware.
+    \resumeItemListEnd
 \resumeSubheadingTwoRoles
         {Amazon Web Services (AWS) - Automated Reasoning Group}{Seattle, WA}
-    {Software Development Engineer II}{Jul 2026 - Present}
-    {Software Development Engineer I}{Feb 2025 - Jul 2026}
+    {Software Development Engineer II}{Jul 2026 -- Oct 2026}
+    {Software Development Engineer I}{Feb 2025 -- Jul 2026}
     \resumeItemListStart
         \item Built an AI agent tool call evaluation system using formal policies such as Dogwood to improve agent safety.
         \item Raised the compute fleet scaling ceiling by 20x (3k to 60k) and cut per-unit scale-up time by 60x through a backend migration of a highly concurrent, distributed service to Firecracker microVMs.
@@ -120,17 +125,17 @@
         \item Mentored junior engineers and interns through design and code review, scoping and guiding an intern project that converted to a full-time offer.
     \resumeItemListEnd
     \resumeSubheading{Amazon Web Services (AWS) - High Performance Computing}{Seattle, WA}
-    {Software Development Engineer I}{Apr 2024 - Feb 2025}
+    {Software Development Engineer I}{Apr 2024 -- Feb 2025}
     \resumeItemListStart
         \item Shipped AWS Parallel Computing Service (PCS), a public managed HPC service, as part of the launch team, building across the AWS Console frontend, the backend service APIs, and the workflows that provisioned customer compute clusters.
     \resumeItemListEnd
-    \resumeRoleOnly{Software Development Engineer Intern}{Jun 2023 - Sep 2023}
+    \resumeRoleOnly{Software Development Engineer Intern}{Jun 2023 -- Sep 2023}
     \resumeItemListStart
         \item Designed internal RESTful APIs and orchestration that collapsed multi-step cluster configuration and job scheduling into single API invocations.
         \item Shipped a public AWS CLI command exposing the managed HPC service directly to enterprise customers.
     \resumeItemListEnd
     \resumeSubheading{UC Davis Applied Mathematics Research Group}{Davis, CA}
-    {Research Assistant \& Software Engineer}{Jun 2021 - Jun 2022}
+    {Research Assistant \& Software Engineer}{Jun 2021 -- Jun 2022}
     \resumeItemListStart
         \item Developed automated reasoning pipeline that computed undiscovered Ramsey constants.
         \item Reduced the search space by 6x through symmetry breaking and optimization techniques in preprocessing.
@@ -147,7 +152,7 @@
 % \vspace{-5pt}
   %   \resumeSubheading
 		% {International Family Union}{Remote}
-		% {Teaching Associate (Part-time)}{Jun 2020 - Jan 2021}
+		% {Teaching Associate (Part-time)}{Jun 2020 -- Jan 2021}
 		% \resumeItemListStart
         % \resumeItem{Project Course - Find Movie Similarity from Plot Summaries}
         %   {Created project based course using Unsupervised learning and natural language processing.}
@@ -177,12 +182,12 @@
   \resumeSubHeadingListStart
     \resumeSubheading
         {University of California, San Diego}{La Jolla, CA}
-        {Master of Science - Computer Science and Engineering}{2022 - 2024}
+        {Master of Science - Computer Science and Engineering}{2022 -- 2024}
         % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Courses:} Probabilistic Reasoning, Software Engineering, Reinforcement Learning, NLP, Convex Optimization, Recommender Systems, Unsupervised Learning, Online Optimization, Human Centered Programming.}}}
     \resumeSubheading
       {University of California, Davis}{Davis, CA}
-      % {Bachelor of Science - Computer Science;  GPA: 3.9/4.0; Graduated with Honors}{Sep 2018 - Jun 2022}
-    {Bachelor of Science - Computer Science, Minor in Mathematics; Graduated with Honors}{2018 - 2022}
+      % {Bachelor of Science - Computer Science;  GPA: 3.9/4.0; Graduated with Honors}{Sep 2018 -- Jun 2022}
+    {Bachelor of Science - Computer Science, Minor in Mathematics; Graduated with Honors}{2018 -- 2022}
       % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Minor:} Mathematics (Number Theory, Modern Algebra, Linear Algebra, Numerical Optimization \& Scientific Computation)}}}
       % {\scriptsize \textit{ \footnotesize{\newline{}\textbf{Courses:} Operating Systems, Data Structures, Algorithms Design, Artificial Intelligence, Machine Learning, Computer Architecture.}}}
     \resumeSubHeadingListEnd
